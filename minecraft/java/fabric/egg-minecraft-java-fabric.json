@@ -4,7 +4,7 @@
         "version": "PLCN_v3",
         "update_url": "https://github.com/M4RC-XX/pelican-eggs/blob/main/minecraft/java/fabric/egg-minecraft-java-fabric.json"
     },
-    "exported_at": "2025-11-22T16:01:44+00:00",
+    "exported_at": "2025-11-22T16:07:16+00:00",
     "name": "Minecraft Java Fabric",
     "author": "M4RC-XX@GitHub",
     "uuid": "c9ae5b37-d7be-4597-95a1-655f7d378cc2",
@@ -20,7 +20,13 @@
     },
     "file_denylist": [],
     "startup_commands": {
-        "Default": "java -Xms128M -Xmx6144M -jar {{SERVER_JARFILE}}"
+        "6GB RAM": "java -Xms128M -Xmx6144M -jar {{SERVER_JARFILE}}",
+        "2GB RAM": "java -Xms128M -Xmx2048M -jar {{SERVER_JARFILE}}",
+        "4GB RAM": "java -Xms128M -Xmx4096M -jar {{SERVER_JARFILE}}",
+        "8GB RAM": "java -Xms128M -Xmx8192M -jar {{SERVER_JARFILE}}",
+        "16GB RAM": "java -Xms128M -Xmx16384M -jar {{SERVER_JARFILE}}",
+        "32GB RAM": "java -Xms128M -Xmx32768M -jar {{SERVER_JARFILE}}",
+        "64GB RAM": "java -Xms128M -Xmx32768M -jar {{SERVER_JARFILE}}"
     },
     "config": {
         "files": "{\n    \"server.properties\": {\n        \"parser\": \"properties\",\n        \"find\": {\n            \"server-ip\": \"0.0.0.0\",\n            \"enable-query\": \"true\",\n            \"server-port\": \"{{server.allocations.default.port}}\"\n        }\n    },\n    \"eula.txt\": {\n        \"eula\": \"true\"\n    }\n}",
