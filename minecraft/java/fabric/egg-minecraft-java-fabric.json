@@ -2,9 +2,9 @@
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
     "meta": {
         "version": "PLCN_v3",
-        "update_url": "https://raw.githubusercontent.com/M4RC-XX/pelican-eggs/refs/heads/main/minecraft/java/fabric/egg-minecraft-java-fabric.json"
+        "update_url": "https://github.com/M4RC-XX/pelican-eggs/blob/main/minecraft/java/fabric/egg-minecraft-java-fabric.json"
     },
-    "exported_at": "2025-11-22T15:58:42+00:00",
+    "exported_at": "2025-11-22T16:01:44+00:00",
     "name": "Minecraft Java Fabric",
     "author": "M4RC-XX@GitHub",
     "uuid": "c9ae5b37-d7be-4597-95a1-655f7d378cc2",
