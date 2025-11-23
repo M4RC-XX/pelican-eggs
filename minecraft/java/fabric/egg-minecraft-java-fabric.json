@@ -4,7 +4,7 @@
         "version": "PLCN_v3",
         "update_url": "https://raw.githubusercontent.com/M4RC-XX/pelican-eggs/refs/heads/main/minecraft/java/fabric/egg-minecraft-java-fabric.json"
     },
-    "exported_at": "2025-11-23T14:40:17+00:00",
+    "exported_at": "2025-11-23T15:33:29+00:00",
     "name": "Minecraft Java Fabric",
     "author": "M4RC-XX@GitHub",
     "uuid": "c9ae5b37-d7be-4597-95a1-655f7d378cc2",
@@ -31,7 +31,7 @@
         "Unlimited": "java -Xms128M -jar {{SERVER_JARFILE}}"
     },
     "config": {
-        "files": "{\n    \"server.properties\": {\n        \"parser\": \"properties\",\n        \"find\": {\n            \"server-ip\": \"0.0.0.0\",\n            \"enable-query\": \"true\",\n            \"server-port\": \"{{server.allocations.default.port}}\"\n        }\n    }\n}",
+        "files": "{\n    \"server.properties\": {\n        \"parser\": \"properties\",\n        \"find\": {\n            \"server-ip\": \"0.0.0.0\",\n            \"enable-query\": \"true\",\n            \"server-port\": \"{{server.allocations.default.port}}\",\n            \"motd\": \"{{server.environment.MOTD}}\",\n            \"difficulty\": \"{{server.environment.DIFFICULTY}}\",\n            \"max-players\": \"{{server.environment.MAXPLAYERS}}\",\n            \"level-seed\": \"{{server.environment.SEED}}\",\n            \"gamemode\": \"{{server.environment.GAMEMODE}}\"\n        }\n    }\n}",
         "startup": "{\n    \"done\": \")! For help, type \",\n    \"userInteraction\": [\n        \"Go to eula.txt for more info.\"\n    ]\n}",
         "logs": "{\n    \"custom\": false,\n    \"location\": \"logs\\/latest.log\"\n}",
         "stop": "stop"
@@ -45,6 +45,18 @@
     },
     "variables": [
         {
+            "sort": 6,
+            "name": "Difficulty",
+            "description": "",
+            "env_variable": "DIFFICULTY",
+            "default_value": "easy",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required"
+            ]
+        },
+        {
             "sort": 3,
             "name": "Fabric Installer",
             "description": "The version of Fabric to install.",
@@ -56,6 +68,19 @@
                 "required",
                 "string",
                 "between:3,15"
+            ]
+        },
+        {
+            "sort": 9,
+            "name": "Game Mode",
+            "description": "",
+            "env_variable": "GAMEMODE",
+            "default_value": "survival",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required",
+                "string"
             ]
         },
         {
@@ -73,6 +98,19 @@
             ]
         },
         {
+            "sort": 7,
+            "name": "Max Players",
+            "description": "",
+            "env_variable": "MAXPLAYERS",
+            "default_value": "20",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "integer",
+                "required"
+            ]
+        },
+        {
             "sort": 2,
             "name": "Minecraft Version",
             "description": "The version of Minecraft to install. Use \"latest\" to install the latest version, or use \"snapshot\" to install the latest snapshot.",
@@ -84,6 +122,28 @@
                 "required",
                 "string",
                 "between:3,15"
+            ]
+        },
+        {
+            "sort": 5,
+            "name": "MOTD",
+            "description": "",
+            "env_variable": "MOTD",
+            "default_value": "A Minecraft Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": []
+        },
+        {
+            "sort": 8,
+            "name": "Seed",
+            "description": "",
+            "env_variable": "SEED",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "string"
             ]
         },
         {
