@@ -4,7 +4,7 @@
         "version": "PLCN_v3",
         "update_url": "https://raw.githubusercontent.com/M4RC-XX/pelican-eggs/refs/heads/main/minecraft/java/fabric/egg-minecraft-java-fabric.json"
     },
-    "exported_at": "2025-11-22T16:07:16+00:00",
+    "exported_at": "2025-11-23T13:54:02+00:00",
     "name": "Minecraft Java Fabric",
     "author": "M4RC-XX@GitHub",
     "uuid": "c9ae5b37-d7be-4597-95a1-655f7d378cc2",
@@ -36,7 +36,7 @@
     },
     "scripts": {
         "installation": {
-            "script": "#!/bin/bash\n# Fabric MC Installation Script\n#\n# Server Files: /mnt/server\napt update\napt install -y curl jq unzip dos2unix wget\nmkdir -p /mnt/server\ncd /mnt/server\n\ncurl -o server.jar https://meta.fabricmc.net/v2/versions/loader/$MC_VERSION/$LOADER_VERSION/$FABRIC_INSTALLER/server/jar\necho \"serverJar=server.jar\" > fabric-server-launcher.properties\necho -e \"Install Complete\"",
+            "script": "#!/bin/bash\n# Fabric MC Installation Script\n#\n# Server Files: /mnt/server\napt update\napt install -y curl jq unzip dos2unix wget\nmkdir -p /mnt/server\ncd /mnt/server\n\ncurl -o eula.txt https://raw.githubusercontent.com/M4RC-XX/pelican-eggs/refs/heads/main/minecraft/java/fabric/eula.txt\ncurl -o server.jar https://meta.fabricmc.net/v2/versions/loader/$MC_VERSION/$LOADER_VERSION/$FABRIC_INSTALLER/server/jar\necho \"serverJar=server.jar\" > fabric-server-launcher.properties\necho -e \"Install Complete\"",
             "container": "ghcr.io/pterodactyl/installers:alpine",
             "entrypoint": "ash"
         }
