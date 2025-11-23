@@ -4,7 +4,7 @@
         "version": "PLCN_v3",
         "update_url": "https://raw.githubusercontent.com/M4RC-XX/pelican-eggs/refs/heads/main/minecraft/java/fabric/egg-minecraft-java-fabric.json"
     },
-    "exported_at": "2025-11-23T13:54:02+00:00",
+    "exported_at": "2025-11-23T14:26:27+00:00",
     "name": "Minecraft Java Fabric",
     "author": "M4RC-XX@GitHub",
     "uuid": "c9ae5b37-d7be-4597-95a1-655f7d378cc2",
@@ -26,17 +26,19 @@
         "8GB RAM": "java -Xms128M -Xmx8192M -jar {{SERVER_JARFILE}}",
         "16GB RAM": "java -Xms128M -Xmx16384M -jar {{SERVER_JARFILE}}",
         "32GB RAM": "java -Xms128M -Xmx32768M -jar {{SERVER_JARFILE}}",
-        "64GB RAM": "java -Xms128M -Xmx32768M -jar {{SERVER_JARFILE}}"
+        "64GB RAM": "java -Xms128M -Xmx32768M -jar {{SERVER_JARFILE}}",
+        "Pelican Controlled": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+        "Unlimited": "java -Xms128M -jar {{SERVER_JARFILE}}"
     },
     "config": {
-        "files": "{\n    \"server.properties\": {\n        \"parser\": \"properties\",\n        \"find\": {\n            \"server-ip\": \"0.0.0.0\",\n            \"enable-query\": \"true\",\n            \"server-port\": \"{{server.allocations.default.port}}\"\n        }\n    },\n    \"eula.txt\": {\n        \"eula\": \"true\"\n    }\n}",
+        "files": "{\n    \"server.properties\": {\n        \"parser\": \"properties\",\n        \"find\": {\n            \"server-ip\": \"0.0.0.0\",\n            \"enable-query\": \"true\",\n            \"server-port\": \"{{server.allocations.default.port}}\"\n        }\n    }\n}",
         "startup": "{\n    \"done\": \")! For help, type \",\n    \"userInteraction\": [\n        \"Go to eula.txt for more info.\"\n    ]\n}",
         "logs": "{\n    \"custom\": false,\n    \"location\": \"logs\\/latest.log\"\n}",
         "stop": "stop"
     },
     "scripts": {
         "installation": {
-            "script": "#!/bin/bash\n# Fabric MC Installation Script\n#\n# Server Files: /mnt/server\napt update\napt install -y curl jq unzip dos2unix wget\nmkdir -p /mnt/server\ncd /mnt/server\n\ncurl -o eula.txt https://raw.githubusercontent.com/M4RC-XX/pelican-eggs/refs/heads/main/minecraft/java/fabric/eula.txt\ncurl -o server.jar https://meta.fabricmc.net/v2/versions/loader/$MC_VERSION/$LOADER_VERSION/$FABRIC_INSTALLER/server/jar\necho \"serverJar=server.jar\" > fabric-server-launcher.properties\necho -e \"Install Complete\"",
+            "script": "#!/bin/bash\n# Minecraft Fabric Installation Script\napt update\napt install -y curl jq unzip dos2unix wget\nmkdir -p /mnt/server\ncd /mnt/server\n\ncurl -o eula.txt https://raw.githubusercontent.com/M4RC-XX/pelican-eggs/refs/heads/main/minecraft/java/fabric/eula.txt\ncurl -o server.jar https://meta.fabricmc.net/v2/versions/loader/$MC_VERSION/$LOADER_VERSION/$FABRIC_INSTALLER/server/jar\necho \"serverJar=server.jar\" > fabric-server-launcher.properties\necho -e \"Install Complete\"",
             "container": "ghcr.io/pterodactyl/installers:alpine",
             "entrypoint": "ash"
         }
