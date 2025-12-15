@@ -4,7 +4,7 @@
         "version": "PLCN_v3",
         "update_url": "https://raw.githubusercontent.com/M4RC-XX/pelican-eggs/refs/heads/main/minecraft/java/fabric/egg-minecraft-java-fabric.json"
     },
-    "exported_at": "2025-11-23T16:32:33+00:00",
+    "exported_at": "2025-12-15T17:25:52+00:00",
     "name": "Minecraft Java Fabric",
     "author": "M4RC-XX@GitHub",
     "uuid": "c9ae5b37-d7be-4597-95a1-655f7d378cc2",
@@ -53,7 +53,9 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": [
-                "required"
+                "required",
+                "string",
+                "in:peaceful,easy,normal,hard"
             ]
         },
         {
@@ -80,7 +82,8 @@
             "user_editable": true,
             "rules": [
                 "required",
-                "string"
+                "string",
+                "in:survival,creative,adventure"
             ]
         },
         {
@@ -102,12 +105,14 @@
             "name": "Max Players",
             "description": "",
             "env_variable": "MAXPLAYERS",
-            "default_value": "20",
+            "default_value": "10",
             "user_viewable": true,
             "user_editable": true,
             "rules": [
                 "integer",
-                "required"
+                "required",
+                "min:1",
+                "max:5000000"
             ]
         },
         {
