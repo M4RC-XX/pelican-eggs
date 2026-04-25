@@ -16,6 +16,10 @@
     ],
     "features": [],
     "docker_images": {
+        "Java 25": "ghcr.io/parkervcp/yolks:java_25",
+        "Java 24": "ghcr.io/parkervcp/yolks:java_24",
+        "Java 23": "ghcr.io/parkervcp/yolks:java_23",
+        "Java 22": "ghcr.io/parkervcp/yolks:java_22",
         "Java 21": "ghcr.io/parkervcp/yolks:java_21"
     },
     "file_denylist": [],
