@@ -2,35 +2,167 @@
     "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
     "meta": {
         "version": "PLCN_v3",
-        "update_url": null
+        "update_url": "https://raw.githubusercontent.com/M4RC-XX/pelican-eggs/refs/heads/main/minecraft/java/neoforge/egg-minecraft-java-neo-forge.json"
     },
-    "exported_at": "2026-04-25T18:06:41+00:00",
+    "exported_at": "2026-04-25T00:00:00+00:00",
     "name": "Minecraft Java NeoForge",
     "author": "M4RC-XX@GitHub",
     "uuid": "b17f3c4a-9fc4-4da4-b3ee-2fdb24d39c3d",
     "description": "NeoForge is a modular, lightweight mod loader for Minecraft",
     "image": null,
-    "tags": [],
+    "tags": [
+        "minecraft",
+        "minecraft java"
+    ],
     "features": [],
     "docker_images": {
         "Java 21": "ghcr.io/parkervcp/yolks:java_21"
     },
     "file_denylist": [],
     "startup_commands": {
-        "6GB RAM": "java -Xms128M -Xmx6144M -jar {{SERVER_JARFILE}}"
+        "6GB RAM": "java -Xms128M -Xmx6144M -jar {{SERVER_JARFILE}}",
+        "2GB RAM": "java -Xms128M -Xmx2048M -jar {{SERVER_JARFILE}}",
+        "4GB RAM": "java -Xms128M -Xmx4096M -jar {{SERVER_JARFILE}}",
+        "8GB RAM": "java -Xms128M -Xmx8192M -jar {{SERVER_JARFILE}}",
+        "16GB RAM": "java -Xms128M -Xmx16384M -jar {{SERVER_JARFILE}}",
+        "32GB RAM": "java -Xms128M -Xmx32768M -jar {{SERVER_JARFILE}}",
+        "64GB RAM": "java -Xms128M -Xmx32768M -jar {{SERVER_JARFILE}}",
+        "Pelican Controlled": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
+        "Unlimited": "java -Xms128M -jar {{SERVER_JARFILE}}"
     },
     "config": {
-        "files": "{}",
-        "startup": "{}",
-        "logs": "{}",
+        "files": "{\n    \"server.properties\": {\n        \"parser\": \"properties\",\n        \"find\": {\n            \"server-ip\": \"0.0.0.0\",\n            \"enable-query\": \"true\",\n            \"server-port\": \"{{server.allocations.default.port}}\",\n            \"motd\": \"{{server.environment.MOTD}}\",\n            \"difficulty\": \"{{server.environment.DIFFICULTY}}\",\n            \"max-players\": \"{{server.environment.MAXPLAYERS}}\",\n            \"level-seed\": \"{{server.environment.SEED}}\",\n            \"gamemode\": \"{{server.environment.GAMEMODE}}\"\n        }\n    }\n}",
+        "startup": "{\n    \"done\": \")! For help, type \",\n    \"userInteraction\": [\n        \"Go to eula.txt for more info.\"\n    ]\n}",
+        "logs": "{\n    \"custom\": false,\n    \"location\": \"logs\\/latest.log\"\n}",
         "stop": "stop"
     },
     "scripts": {
         "installation": {
-            "script": null,
-            "container": "ghcr.io/pelican-eggs/installers:debian",
+            "script": "#!/bin/bash\n# Minecraft Fabric Installation Script\napt update\napt install -y curl jq unzip dos2unix wget\nmkdir -p /mnt/server\ncd /mnt/server\n\n# Enable snapshots\nif [ -z \"$MC_VERSION\" ] || [ \"$MC_VERSION\" == \"latest\" ]; then\n  MC_VERSION=$(curl -sSL https://meta.fabricmc.net/v2/versions/game | jq -r '.[] | select(.stable== true )|.version' | head -n1)\nelif [ \"$MC_VERSION\" == \"snapshot\" ]; then\n  MC_VERSION=$(curl -sSL https://meta.fabricmc.net/v2/versions/game | jq -r '.[] | select(.stable== false )|.version' | head -n1)\nfi\n\nif [ -z \"$FABRIC_INSTALLER\" ] || [ \"$FABRIC_INSTALLER\" == \"latest\" ]; then\n  FABRIC_INSTALLER=$(curl -sSL https://meta.fabricmc.net/v2/versions/installer | jq -r '.[0].version')\nfi\n\nif [ -z \"$LOADER_VERSION\" ] || [ \"$LOADER_VERSION\" == \"latest\" ]; then\n  LOADER_VERSION=$(curl -sSL https://meta.fabricmc.net/v2/versions/loader | jq -r '.[] | select(.stable== true )|.version' | head -n1)\nelif [ \"$LOADER_VERSION\" == \"snapshot\" ]; then\n  LOADER_VERSION=$(curl -sSL https://meta.fabricmc.net/v2/versions/loader | jq -r '.[] | select(.stable== false )|.version' | head -n1)\nfi\n\n#wget -O fabric-installer.jar https://maven.fabricmc.net/net/fabricmc/fabric-installer/$FABRIC_INSTALLER/fabric-installer-$FABRIC_INSTALLER.jar\n#java -jar fabric-installer.jar server -mcversion $MC_VERSION -loader $LOADER_VERSION -downloadMinecraft\n\ncurl -o eula.txt https://raw.githubusercontent.com/M4RC-XX/pelican-eggs/refs/heads/main/minecraft/java/fabric/eula.txt\ncurl -o server.jar https://meta.fabricmc.net/v2/versions/loader/$MC_VERSION/$LOADER_VERSION/$FABRIC_INSTALLER/server/jar\necho -e \"Install Complete\"",
+            "container": "ghcr.io/parkervcp/installers:debian",
             "entrypoint": "bash"
         }
     },
-    "variables": []
+    "variables": [
+        {
+            "sort": 6,
+            "name": "Difficulty",
+            "description": "",
+            "env_variable": "DIFFICULTY",
+            "default_value": "easy",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required",
+                "string",
+                "in:peaceful,easy,normal,hard"
+            ]
+        },
+        {
+            "sort": 3,
+            "name": "Fabric Installer",
+            "description": "The version of Fabric to install.",
+            "env_variable": "FABRIC_INSTALLER",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required",
+                "string",
+                "between:3,15"
+            ]
+        },
+        {
+            "sort": 9,
+            "name": "Game Mode",
+            "description": "",
+            "env_variable": "GAMEMODE",
+            "default_value": "survival",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required",
+                "string",
+                "in:survival,creative,adventure"
+            ]
+        },
+        {
+            "sort": 4,
+            "name": "Fabric Loader Version",
+            "description": "The version of Fabric Loader to install.",
+            "env_variable": "LOADER_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required",
+                "string",
+                "between:3,15"
+            ]
+        },
+        {
+            "sort": 7,
+            "name": "Max Players",
+            "description": "",
+            "env_variable": "MAXPLAYERS",
+            "default_value": "10",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "integer",
+                "required",
+                "min:1",
+                "max:5000000"
+            ]
+        },
+        {
+            "sort": 2,
+            "name": "Minecraft Version",
+            "description": "The version of Minecraft to install. Use \"latest\" to install the latest version, or use \"snapshot\" to install the latest snapshot.",
+            "env_variable": "MC_VERSION",
+            "default_value": "latest",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "required",
+                "string",
+                "between:3,15"
+            ]
+        },
+        {
+            "sort": 5,
+            "name": "MOTD",
+            "description": "",
+            "env_variable": "MOTD",
+            "default_value": "A Minecraft Server",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": []
+        },
+        {
+            "sort": 8,
+            "name": "Seed",
+            "description": "",
+            "env_variable": "SEED",
+            "default_value": "",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": [
+                "string"
+            ]
+        },
+        {
+            "sort": 1,
+            "name": "Server Jar File",
+            "description": "The name of the server jarfile to run the server with.",
+            "env_variable": "SERVER_JARFILE",
+            "default_value": "server.jar",
+            "user_viewable": true,
+            "user_editable": false,
+            "rules": [
+                "regex:/^([\\w\\d._-]+)(\\.jar)$/",
+                "required"
+            ]
+        }
+    ]
 }
