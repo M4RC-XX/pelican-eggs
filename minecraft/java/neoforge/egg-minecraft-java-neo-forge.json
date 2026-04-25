@@ -1,0 +1,36 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PANEL",
+    "meta": {
+        "version": "PLCN_v3",
+        "update_url": null
+    },
+    "exported_at": "2026-04-25T18:06:41+00:00",
+    "name": "Minecraft Java NeoForge",
+    "author": "M4RC-XX@GitHub",
+    "uuid": "b17f3c4a-9fc4-4da4-b3ee-2fdb24d39c3d",
+    "description": "NeoForge is a modular, lightweight mod loader for Minecraft",
+    "image": null,
+    "tags": [],
+    "features": [],
+    "docker_images": {
+        "Java 21": "ghcr.io/parkervcp/yolks:java_21"
+    },
+    "file_denylist": [],
+    "startup_commands": {
+        "6GB RAM": "java -Xms128M -Xmx6144M -jar {{SERVER_JARFILE}}"
+    },
+    "config": {
+        "files": "{}",
+        "startup": "{}",
+        "logs": "{}",
+        "stop": "stop"
+    },
+    "scripts": {
+        "installation": {
+            "script": null,
+            "container": "ghcr.io/pelican-eggs/installers:debian",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": []
+}
