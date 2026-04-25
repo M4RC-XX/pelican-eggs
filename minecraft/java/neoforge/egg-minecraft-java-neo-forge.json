@@ -9,7 +9,7 @@
     "author": "M4RC-XX@GitHub",
     "uuid": "b17f3c4a-9fc4-4da4-b3ee-2fdb24d39c3d",
     "description": "NeoForge is a modular, lightweight mod loader for Minecraft",
-    "image": https://neoforged.net/img/authors/neoforged.png,
+    "image": "https://neoforged.net/img/authors/neoforged.png",
     "tags": [
         "minecraft",
         "minecraft java"
